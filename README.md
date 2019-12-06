@@ -27,7 +27,7 @@ class MyFilter extends RangeInputFilter {
 
     public function apply(Request $request, $query, $value)
     {
-        // $value will always be an array
+        // $value will always be [ "from" => ?, "to" => ? ]
     }
     
     public function options(Request $request)
