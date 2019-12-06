@@ -1,4 +1,4 @@
-# Nova Slider Filter
+# Nova Range Input Filter
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/digital-creative/nova-range-input-filter)](https://packagist.org/packages/digital-creative/nova-range-input-filter)
 [![Total Downloads](https://img.shields.io/packagist/dt/digital-creative/nova-range-input-filter)](https://packagist.org/packages/digital-creative/nova-range-input-filter)
