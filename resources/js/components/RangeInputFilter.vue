@@ -49,11 +49,12 @@
         methods: {
             handleChange(event) {
 
-                this.value[ event.target.name ] = event.target.value
-
                 this.$store.commit(`${ this.resourceName }/updateFilterState`, {
                     filterClass: this.filterKey,
-                    value: this.value
+                    value: {
+                        ...this.value,
+                        [ event.target.name ]: event.target.value
+                    }
                 })
 
                 this.$emit('change')
