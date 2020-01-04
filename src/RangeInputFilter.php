@@ -15,6 +15,17 @@ class RangeInputFilter extends Filter
     public $component = 'range-input-filter';
 
     /**
+     * @var array
+     */
+    public $defaults = [
+        'fromPlaceholder' => null,
+        'toPlaceholder' => null,
+        'inputType' => 'number',
+        'dividerLabel' => 'to',
+        'fullWidth' => true
+    ];
+
+    /**
      * @param Request $request
      * @param Builder $query
      * @param mixed $value
@@ -35,13 +46,7 @@ class RangeInputFilter extends Filter
      */
     public function options(Request $request): array
     {
-        return [
-            'fromPlaceholder' => null,
-            'toPlaceholder' => null,
-            'inputType' => 'number',
-            'dividerLabel' => 'to',
-            'fullWidth' => true
-        ];
+        return [];
     }
 
     /**
@@ -51,7 +56,9 @@ class RangeInputFilter extends Filter
      */
     public function jsonSerialize(): array
     {
-        return array_merge(parent::jsonSerialize(), [ 'options' => $this->options(resolve(Request::class)) ]);
+        return array_merge(
+            parent::jsonSerialize(), [ 'options' => array_merge($this->defaults, $this->options(resolve(Request::class))) ]
+        );
     }
 
 }

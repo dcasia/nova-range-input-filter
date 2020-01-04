@@ -1,29 +1,29 @@
 <template>
 
-    <div>
+    <div class="range-input-filter">
 
         <h3 class="text-sm uppercase tracking-wide text-80 bg-30 p-3">
             {{ filter.name }}
         </h3>
 
-        <div class="flex p-2 flex-wrap items-center">
+        <div class="flex p-2 flex-no-wrap items-center">
 
-            <input class="flex items-center form-control form-input text-sm min-w-0 border-60"
-                   :class="{ 'flex-1': filter.options.fullWidth }"
+            <input class="flex items-center form-control form-input text-sm border-60"
+                   :class="{ 'w-full': filter.options.fullWidth }"
                    name="from"
                    :type="filter.options.inputType"
                    :placeholder="filter.options.fromPlaceholder"
-                   :value="value.from"
+                   v-model="value.from"
                    @change="handleChange"/>
 
-            <div class="text-sm mx-2">{{ filter.options.dividerLabel }}</div>
+            <div class="text-sm mx-2 text-center">{{ filter.options.dividerLabel }}</div>
 
-            <input class="flex items-center form-control form-input text-sm min-w-0 border-60"
-                   :class="{ 'flex-1': filter.options.fullWidth }"
+            <input class="flex items-center form-control form-input text-sm border-60"
+                   :class="{ 'w-full': filter.options.fullWidth }"
                    name="to"
                    :type="filter.options.inputType"
                    :placeholder="filter.options.toPlaceholder"
-                   :value="value.to"
+                   v-model="value.to"
                    @change="handleChange"/>
 
         </div>
@@ -49,6 +49,16 @@
         methods: {
             handleChange(event) {
 
+                /**
+                 * Dont refresh the page if user is still typing the values
+                 */
+                if (Number.isNaN(parseInt(this.value.from)) !==
+                    Number.isNaN(parseInt(this.value.to))) {
+
+                    return
+
+                }
+
                 this.$store.commit(`${ this.resourceName }/updateFilterState`, {
                     filterClass: this.filterKey,
                     value: {
@@ -66,10 +76,7 @@
                 return this.$store.getters[ `${ this.resourceName }/getFilter` ](this.filterKey)
             },
             value() {
-                return this.filter.currentValue || {
-                    from: null,
-                    to: null
-                }
+                return { ...this.filter.currentValue } || { from: '', to: '' }
             }
         }
     }
