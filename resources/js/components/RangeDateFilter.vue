@@ -1,6 +1,6 @@
 <template>
 
-    <div class="range-input-filter">
+    <div class="range-date-filter">
 
         <h3 class="text-sm uppercase tracking-wide text-80 bg-30 p-3">
             {{ filter.name }}
