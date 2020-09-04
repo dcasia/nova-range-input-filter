@@ -30,7 +30,7 @@ class MyFilter extends RangeInputFilter {
         // $value will always be [ "from" => ?, "to" => ? ]
     }
     
-    public function options(Request $request)
+    public function options(Request $request) : array
     {
         return [
             'fromPlaceholder' => 0,
