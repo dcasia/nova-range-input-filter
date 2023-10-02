@@ -1,64 +1,37 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace DigitalCreative\RangeInputFilter;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
-class RangeInputFilter extends Filter
+abstract class RangeInputFilter extends Filter
 {
-
-    /**
-     * @var string
-     */
     public $component = 'range-input-filter';
 
-    /**
-     * @var array
-     */
-    public $defaults = [
-        'fromPlaceholder' => null,
-        'toPlaceholder' => null,
-        'inputType' => 'number',
-        'dividerLabel' => 'to',
-        'fullWidth' => true
-    ];
-
-    /**
-     * @param Request $request
-     * @param Builder $query
-     * @param mixed $value
-     *
-     * @return Builder
-     */
-    public function apply(Request $request, $query, $value)
+    public function placeholder(string $fromPlaceholder, string $toPlaceholder): self
     {
-        return $query;
+        return $this->withMeta([ 'fromPlaceholder' => $fromPlaceholder, 'toPlaceholder' => $toPlaceholder ]);
     }
 
-    /**
-     * Get the filter's available options.
-     *
-     * @param Request $request
-     *
-     * @return array
-     */
-    public function options(Request $request): array
+    public function dividerLabel(string $dividerLabel): self
     {
-        return [];
+        return $this->withMeta([ 'dividerLabel' => $dividerLabel ]);
     }
 
-    /**
-     * Prepare the filter for JSON serialization.
-     *
-     * @return array
-     */
-    public function jsonSerialize(): array
+    public function inputType(string $inputType): self
     {
-        return array_merge(
-            parent::jsonSerialize(), [ 'options' => array_merge($this->defaults, $this->options(resolve(Request::class))) ]
-        );
+        return $this->withMeta([ 'inputType' => $inputType ]);
     }
 
+    public function fromAttributes(array $attributes): self
+    {
+        return $this->withMeta([ 'fromAttributes' => $attributes ]);
+    }
+
+    public function toAttributes(array $attributes): self
+    {
+        return $this->withMeta([ 'toAttributes' => $attributes ]);
+    }
 }

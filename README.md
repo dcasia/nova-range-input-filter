@@ -6,7 +6,10 @@
 
 A Laravel Nova range input filter.
 
-![RangeInputFilter in Action](https://raw.githubusercontent.com/dcasia/nova-range-input-filter/master/screenshot.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/main/screenshots/dark.png">
+  <img alt="RangeInputFilter in Action" src="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/main/screenshots/light/light.png">
+</picture>
 
 # Installation
 
@@ -25,18 +28,10 @@ use DigitalCreative\RangeInputFilter\RangeInputFilter;
 
 class MyFilter extends RangeInputFilter {
 
-    public function apply(Request $request, $query, $value)
+    public function apply(NovaRequest $request, $query, $value)
     {
-        // $value will always be [ "from" => ?, "to" => ? ]
-    }
-    
-    public function options(Request $request) : array
-    {
-        return [
-            'fromPlaceholder' => 0,
-            'toPlaceholder' => 20,
-            'dividerLabel' => 'to',
-        ];
+        $from = data_get($value, 'from');
+        $to = data_get($value, 'to');
     }
 
 }
@@ -47,15 +42,40 @@ and use it as usual on the filters methods within your resource class:
 ```php
 class ExampleNovaResource extends Resource {
 
-    public function filters(Request $request)
+    public function filters(NovaRequest $request): array
     {
         return [
-            new MyFilter()
+            MyFilter::make()
         ];
     }
 
 }
 ```
+
+### Options
+
+The available options are straight forward:
+
+```php
+class ExampleNovaResource extends Resource {
+
+    public function filters(NovaRequest $request): array
+    {
+        return [
+            MyFilter::make()
+                ->dividerLabel('<>') // control the divider label in between the inputs
+                ->inputType('week') // supports any html input type
+                ->placeholder('From', 'To') // control the placeholder of the inputs
+                ->fromAttributes([ 'min' => 0 ]) // some inputs type like number accepts more attributes like min/max/step etc..
+                ->toAttributes([ 'max' => 100 ]) 
+        ];
+    }
+
+}
+```
+
+Due to the size limitation of the native nova filter box some input types may not look as expected, for this reason you can
+use [Nova Mega Filter](https://github.com/dcasia/nova-mega-filter) package instead which is a drop-in replacement for the native filter box.
 
 ## License
 
