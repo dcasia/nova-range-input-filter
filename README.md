@@ -7,8 +7,8 @@
 A Laravel Nova range input filter.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/nova-4-clean-up/screenshots/dark.png">
-  <img alt="RangeInputFilter in Action" src="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/nova-4-clean-up/screenshots/light/light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/main/screenshots/dark.png">
+  <img alt="RangeInputFilter in Action" src="https://raw.githubusercontent.com/dcasia/nova-range-input-filter/main/screenshots/light/light.png">
 </picture>
 
 # Installation
@@ -76,8 +76,6 @@ class ExampleNovaResource extends Resource {
 
 Due to the size limitation of the native nova filter box some input types may not look as expected, for this reason you can
 use [Nova Mega Filter](https://github.com/dcasia/nova-mega-filter) package instead which is a drop-in replacement for the native filter box.
-
-```php
 
 ## License
 
