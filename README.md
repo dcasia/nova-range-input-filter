@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/digital-creative/nova-range-input-filter)](https://packagist.org/packages/digital-creative/nova-range-input-filter)
 [![Total Downloads](https://img.shields.io/packagist/dt/digital-creative/nova-range-input-filter)](https://packagist.org/packages/digital-creative/nova-range-input-filter)
-[![License](https://img.shields.io/packagist/l/digital-creative/nova-range-input-filter)](https://github.com/dcasia/nova-range-input-filter/blob/master/LICENSE)
+[![License](https://img.shields.io/packagist/l/digital-creative/nova-range-input-filter)](https://github.com/dcasia/nova-range-input-filter/blob/main/LICENSE)
 
 A Laravel Nova range input filter.
 
